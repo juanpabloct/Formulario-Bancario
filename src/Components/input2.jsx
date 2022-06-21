@@ -17,7 +17,6 @@ function Input({
         onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);
-          console.log(resValidacion);
           setValidaciones((valor) => {
             return {
               ...valor,
@@ -35,12 +34,11 @@ function Input({
         label={placeholder}
         variant="outlined"
         sx={{ width: "100%" }}
-        helperText={
-          validaciones[placeholder][2] ? validaciones[placeholder][2] : ""
-        }
+        error={validaciones[placeholder]&&!validaciones[placeholder][0]}
+        helperText={validaciones[placeholder]&&validaciones[placeholder][1]}
       />
       <hr style={{ width: "100%", marginLeft: "0" }} />
     </div>
   );
 }
-export default Input;
+export default memo(Input);
