@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import {
   TextField,
@@ -14,31 +14,48 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import Input from "./input2";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import FormInputsText from "../variables/FormInputsText";
+import {FormInputsText, FormInputsNumbers} from "../variables/FormInputs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { margin } from "@mui/system";
 import validationIsValid from "../funciones/validationIsValid";
+import InputText from "./inputText";
+import InputNumber from "./inputNumber";
 
-export default function Forms({ valueInputs, setValueInputs }) {
+export default function Forms({ valueInputs, setValueInputs, setShowValues, showValues }) {
   const statePerson = ["Soltero", "Casado", "Divorciado"];
   const [validaciones, setValidaciones] = useState({});
   const responseValidation = validationIsValid(validaciones);
-  console.log(responseValidation);
   return (
-    <form action="" className="" style={{ width: "90%" }}>
+    <form action="" className="" style={{ width: "90%", margin:'auto' }}>
       <Grid container columns={2} justifyContent={"center"} spacing={2}>
         {FormInputsText.map((input, index) => {
           const { placeholder, validacion } = input;
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
-              <Input
+              <InputText
                 setValidaciones={setValidaciones}
                 validacion={validacion}
                 setValueInputs={setValueInputs}
+                showValues={showValues}
+                key={index}
+                placeholder={placeholder}
+                validaciones={validaciones}
+              />
+            </Grid>
+          );
+        })}
+        {FormInputsNumbers.map((input, index) => {
+          const { placeholder, validacion, length} = input;
+          return (
+            <Grid item xs={2} md={2} lg={1} key={index}>
+              <InputNumber
+                setValidaciones={setValidaciones}
+                validacion={validacion}
+                length={length}
+                setValueInputs={setValueInputs}
+                showValues={showValues}
                 key={index}
                 placeholder={placeholder}
                 validaciones={validaciones}
@@ -89,7 +106,7 @@ export default function Forms({ valueInputs, setValueInputs }) {
         <Grid item xs={2} md={2} lg={2}>
           <label htmlFor="description" style={{ fontFamily: "helvatica" }}>
             Descripción
-          </label>{" "}
+          </label>
           <br />
           <textarea
             name="description"
@@ -161,6 +178,7 @@ export default function Forms({ valueInputs, setValueInputs }) {
             variant="contained"
             disabled={!responseValidation}
             sx={{ margin: "auto" }}
+            onClick={()=>{setShowValues(true)}}
           >
             Enviar
           </Button>

@@ -8,7 +8,6 @@ export default function validationIsValid(validation) {
       return value === true;
     });
 
-    console.log(respuesta);
     return respuesta;
   } else {
     return false;

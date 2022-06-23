@@ -5,19 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const useStyles = (theme) => ({
-  root: {
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-    },
-    [theme.breakpoints.up("md")]: {
-      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-    },
-    [theme.breakpoints.up("lg")]: {
-      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-    },
-  },
-});
+
 root.render(
   <React.StrictMode>
     <App />

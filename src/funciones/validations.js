@@ -1,8 +1,8 @@
 export const condicionEdad = (validacion) => {
-  if (validacion.length > 0 && validacion.length < 3) {
-    return [true, "Edad correcta"];
+  if (validacion.length > 0 && validacion.length < 3&&+ validacion>18) {
+    return [true, "Edad Valida para prestamos"];
   } else {
-    return [false, "Edad incorrecta"];
+    return [false, "Edad no apta para prestamos"];
   }
 };
 export const condicionMensual = (validacion) => {
