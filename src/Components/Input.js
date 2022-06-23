@@ -30,7 +30,6 @@ function validateInput(validacions, value) {
     let state;
     for (let validacion of validacions) {
       const result = validacion(value);
-      console.log(result);
       if (typeof result === "boolean") {
       }
       if (Array.isArray(result)) {

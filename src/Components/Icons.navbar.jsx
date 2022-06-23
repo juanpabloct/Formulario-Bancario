@@ -9,7 +9,7 @@ export default function IconsNavbar({ icons }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "3rem",
+        gap: "1rem",
         marginBottom: "2rem",
         marginTop: "1rem",
       }}
@@ -21,7 +21,6 @@ export default function IconsNavbar({ icons }) {
             key={index}
             ref={refContent}
             onClick={() => {
-              console.log(seleccionado);
               setSeleccionado((current) => {
                 const newArray = current.map((item, key) => {
                   if (index === key)
