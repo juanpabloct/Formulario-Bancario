@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import React, { memo, useCallback } from "react";
 
 function InputText({
+  referenciaInputs,
   placeholder,
   validacion,
   showValues,

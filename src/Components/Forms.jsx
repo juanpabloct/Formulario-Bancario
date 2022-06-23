@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import {
   TextField,
@@ -27,6 +27,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
   const statePerson = ["Soltero", "Casado", "Divorciado"];
   const [validaciones, setValidaciones] = useState({});
   const responseValidation = validationIsValid(validaciones);
+  const refereciaInputs=useRef()
   return (
     <form action="" className="" style={{ width: "90%", margin:'auto' }}>
       <Grid container columns={2} justifyContent={"center"} spacing={2}>
@@ -35,6 +36,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputText
+                refereciaInputs={refereciaInputs}
                 setValidaciones={setValidaciones}
                 validacion={validacion}
                 setValueInputs={setValueInputs}
@@ -51,6 +53,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputNumber
+                refereciaInputs={refereciaInputs}
                 setValidaciones={setValidaciones}
                 validacion={validacion}
                 length={length}
@@ -65,10 +68,11 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
         })}
         <Grid item xs={2} md={2} lg={2}>
           <FormControlLabel
+            ref={refereciaInputs}
             className="checkbox"
             onClick={(e) => {
               setValueInputs((current) => {
-                return { ...current, trabaja: e.target.checked };
+                return !showValues?{ ...current, trabaja: e.target.checked }:{...current};
               });
             }}
             control={<Checkbox />}
@@ -88,7 +92,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
               label="Selecciona tu estado"
               onChange={(e) => {
                 setValueInputs((current) => {
-                  return { ...current, estado: e.target.value };
+                return !showValues?{ ...current, estado: e.target.value }:{...current};
                 });
               }}
             >
@@ -109,6 +113,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           </label>
           <br />
           <textarea
+            ref={refereciaInputs}
             name="description"
             id="description"
             rows="3"
@@ -124,7 +129,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             }}
             onKeyUp={(e) => {
               setValueInputs((current) => {
-                return { ...current, description: e.target.value };
+                return !showValues?{ ...current, description: e.target.value }:{...current};
               });
             }}
           />
@@ -134,12 +139,13 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DesktopDatePicker
+              ref={refereciaInputs}
                 label="Date desktop"
                 inputFormat="MM/dd/yyyy"
                 value={valueInputs.date ? valueInputs.date : ""}
                 onChange={(e) => {
                   setValueInputs((current) => {
-                    return { ...current, date: e };
+                    return !showValues?{ ...current, date: e }:{...current};
                   });
                 }}
                 renderInput={(params) => <TextField {...params} />}
@@ -154,20 +160,21 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             type="file"
             name=""
             id=""
+            ref={refereciaInputs}
             onChange={(e) => {
               setValueInputs((current) => {
-                return {
+                return !showValues?{
                   ...current,
                   image: URL.createObjectURL(e.target.files[0]),
-                };
+                }:{...current}
               });
             }}
           />
         </Grid>
         <br />
-        <Grid justifyContent={"center"} display={"flex"}>
+        <Grid item justifyContent={"center"} display={"flex"}>
           <img
-            src={valueInputs.image ? valueInputs.image : ""}
+            src={!showValues && valueInputs.image ? valueInputs.image : ""}
             alt=""
             style={{ width: "50%", margin: "auto" }}
           />
@@ -178,7 +185,10 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             variant="contained"
             disabled={!responseValidation}
             sx={{ margin: "auto" }}
-            onClick={()=>{setShowValues(true)}}
+            onClick={()=>{
+              setShowValues(true)
+              console.log(refereciaInputs.current);
+            }}
           >
             Enviar
           </Button>

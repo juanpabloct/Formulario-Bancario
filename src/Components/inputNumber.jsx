@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import React, { memo, useCallback } from "react";
 
 function InputNumber({
+  referenciaInputs,
   placeholder,
   validacion,
   showValues,
@@ -10,13 +11,13 @@ function InputNumber({
   setValueInputs,
   length
 }) {
-  console.log();
   const callback = useCallback((value) => {
     return validacion(value);
   });
   return (
     <div>
       <TextField
+      ref={referenciaInputs}
           onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);
@@ -34,7 +35,7 @@ function InputNumber({
           });
         }}
         inputProps={{
-          maxlength: length
+          maxLength: length
         }}        
         id="outlined-basic"
         label={placeholder}

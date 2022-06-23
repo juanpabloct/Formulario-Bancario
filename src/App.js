@@ -47,7 +47,7 @@ function App() {
           </h1>
           <Forms valueInputs={valueInputs} setValueInputs={setValueInputs} setShowValues={setShowValues} showValues={showValues} />
         </Grid>             
-      {showValues && <Grid sm={4} md={6} lg={6} xs={5} xl={6} ><DataForms values={valueInputs}/></Grid>}
+      {showValues && <Grid item sm={4} md={6} lg={6} xs={5} xl={6} ><DataForms values={valueInputs}/></Grid>}
       </Grid>
 
     </div>
