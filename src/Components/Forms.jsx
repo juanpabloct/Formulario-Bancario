@@ -40,6 +40,7 @@ export default function Forms({
       <Grid container columns={2} justifyContent={"center"} spacing={2}>
         {FormInputsText.map((input, index) => {
           const { placeholder, validacion } = input;
+          console.log(placeholder);
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputText

@@ -1,35 +1,35 @@
 import CondicionEsNumero from "../funciones/condicionEsNumero";
 
-
 import {
   condicionEdad,
   condicionMensual,
   condicionNumeroTelefonico,
 } from "../funciones/validations";
 export const FormInputsText = [
-    {
-      placeholder: "nombre",
-      validacion: (validacion) => {
-        if (Number.isInteger(+validacion)) {
-          return [false, "Caracteres invalidos"];
-        } else {
-          return [true, "Caracteres correctos"];
-        }
-      },
+  {
+    placeholder: "name",
+    validacion: (validacion) => {
+      if (Number.isInteger(+validacion)) {
+        return [false, "Caracteres invalidos"];
+      } else {
+        return [true, "Caracteres correctos"];
+      }
     },
-    {
-      placeholder: "Apellido",
-      validacion: (validacion) => {
-        if (Number.isInteger(+validacion)) {
-          return [false, "Caracteres invalidos"];
-        } else {
-          return [true, "Nombre correcto"];
-        }
-      },
+  },
+  {
+    placeholder: "lastName",
+    validacion: (validacion) => {
+      if (Number.isInteger(+validacion)) {
+        return [false, "Caracteres invalidos"];
+      } else {
+        return [true, "Nombre correcto"];
+      }
     },
-  ];
-export const FormInputsNumbers=[{
-    placeholder: "edad",
+  },
+];
+export const FormInputsNumbers = [
+  {
+    placeholder: "Age",
     validacion: (valorInput) => {
       if (Number.isInteger(+valorInput)) {
         return CondicionEsNumero(condicionEdad, valorInput);
@@ -37,11 +37,10 @@ export const FormInputsNumbers=[{
         return [false, "No es un numero correcto"];
       }
     },
-    length:2
-
+    length: 2,
   },
   {
-    placeholder: "Dinero mensual",
+    placeholder: "Money month",
     validacion: (valorInput) => {
       if (Number.isInteger(+valorInput)) {
         return CondicionEsNumero(condicionMensual, valorInput);
@@ -51,17 +50,17 @@ export const FormInputsNumbers=[{
     },
   },
   {
-    placeholder: "Numero celular",
+    placeholder: "Number phone",
     validacion: (valorInput) => {
       return CondicionEsNumero(condicionNumeroTelefonico, valorInput);
     },
-    length:10
+    length: 10,
   },
   {
-    placeholder: "Numero fijo",
+    placeholder: "Fixed number",
     validacion: (valorInput) => {
       return CondicionEsNumero(condicionNumeroTelefonico, valorInput);
     },
-    length:10
-
-  }, ]
+    length: 10,
+  },
+];
