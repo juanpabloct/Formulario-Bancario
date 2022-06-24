@@ -4,6 +4,7 @@ import React from "react";
 export default function DataForms({ values }) {
   const keys = Object.keys(values);
   const filterImage = keys.filter((value) => value === "image");
+  console.log(filterImage);
 
   return (
     <div>
@@ -11,7 +12,7 @@ export default function DataForms({ values }) {
       <hr />
       <Grid
         container
-        columns={filterImage[0] === "image" ? 2 : 1}
+        columns={values[filterImage[0]] === "image" ? 2 : 1}
         style={{ textAlign: "center" }}
       >
         {
