@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import {
   Checkbox,
@@ -8,17 +8,17 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import { FormInputsText, FormInputsNumbers } from "../variables/FormInputs";
+import { FormInputsText, FormInputsNumbers } from "../../variables/FormInputs";
 
-import validationIsValid from "../funciones/validationIsValid";
+import validationIsValid from "../../funciones/validationIsValid";
 import InputText from "./inputText";
 import InputNumber from "./inputNumber";
+import FormDataImg from "./FormDataImg";
+import FormDate from "./FormDate";
 import FormSelect from "./FormSelect";
 import FormTextarea from "./FormTextarea";
-import FormDate from "./FormDate";
-import FormDataImg from "./FormDataImg";
 
-export default function Forms({
+export default function AllForms({
   valueInputs,
   setValueInputs,
   setShowValues,
@@ -92,7 +92,7 @@ export default function Forms({
         </Grid>
         {/*Form de input type text description*/}
         <Grid item xs={2} md={2} lg={2}>
-         <FormTextarea setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
+          <FormTextarea setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
           <hr />
         </Grid>
         {/*input of date*/}

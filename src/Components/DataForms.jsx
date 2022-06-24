@@ -22,7 +22,9 @@ export default function DataForms({ values }) {
             {[values].map((value, index) => {
               return (
                 <div key={index}>
-                  {/*If image exist that take that space*/}
+                  {
+                  //If image exist that take that space
+                  }
                   {filterImage[0] === "image" && (
                     <img
                       style={{ width: "100%" }}
@@ -35,17 +37,19 @@ export default function DataForms({ values }) {
             })}
           </Grid>
         }
-        {/*Values of the input*/}
+        {
+        //Values of the input*
+        }
         <Grid item xs={2} md={1} height={"30rem"} overflow="auto">
           {[values].map((value, index) => {
             return (
               <div key={index}>
                 {keys.map((item, index) => {
                   if (item !== "image") {
-                    {/*value of the date */}
+                      //value of the date      
                     if (item === "date") {
-                      {/*if date dont have value then it isnt show */}
-                      return values[item]!=''&&(
+                      //if date dont have value then it isnt show 
+                      return values[item]!==''&&(
                         <div key={index}>
                           <h3
                             style={{
@@ -59,10 +63,10 @@ export default function DataForms({ values }) {
                           <span>{values[item].constructor()}</span>
                         </div>
                       );
-                      {/*values of inputs*/}
+                    //values of inputs
                     } else {
-                      {/*if input text and number dont have value then it isnt show */}
-                      return values[item]!=''&&(
+                      //if input text and number dont have value then it isnt show
+                      return values[item]!==''&&(
                         <div key={index} className='styleValue'>
                           <h3
                             style={{

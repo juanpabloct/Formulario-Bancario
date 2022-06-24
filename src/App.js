@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 
 import "./App.css";
-import Forms from "./Components/Forms";
-import IconsNavbar from "./Components/Icons.navbar";
-import iconsNavbar from "./variables/Iconos.Navbar";
+import AllForms from "./Components/Forms/AllForms";
+
 import DataForms from "./Components/DataForms";
 import { camposInputs } from "./variables/camposInputs";
 import Navbar from "./Components/Navbar";
@@ -34,7 +33,7 @@ function App() {
           <h1 style={{ textAlign: "center", fontFamily: "italic" }}>
             Formulario Crediticio
           </h1>
-          <Forms
+          <AllForms
             valueInputs={valueInputs}
             setValueInputs={setValueInputs}
             setShowValues={setShowValues}
