@@ -1,27 +1,22 @@
 import React, { useRef } from "react";
 
 import {
-  TextField,
   Checkbox,
   FormControlLabel,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem,
   Button,
-  Stack,
   Grid,
 } from "@mui/material";
 import { useState } from "react";
 
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { FormInputsText, FormInputsNumbers } from "../variables/FormInputs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import validationIsValid from "../funciones/validationIsValid";
 import InputText from "./inputText";
 import InputNumber from "./inputNumber";
+import FormSelect from "./FormSelect";
+import FormTextarea from "./FormTextarea";
+import FormDate from "./FormDate";
+import FormDataImg from "./FormDataImg";
 
 export default function Forms({
   valueInputs,
@@ -29,7 +24,6 @@ export default function Forms({
   setShowValues,
   showValues,
 }) {
-  const statePerson = ["Soltero", "Casado", "Divorciado"];
   //all validation
   const [validaciones, setValidaciones] = useState({});
   //Validations from input for active button
@@ -40,18 +34,17 @@ export default function Forms({
       <Grid container columns={2} justifyContent={"center"} spacing={2}>
         {FormInputsText.map((input, index) => {
           const { placeholder, validacion } = input;
-          console.log(input);
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputText
-                setValidaciones={setValidaciones}
-                validacion={validacion}
+                setValidations={setValidaciones}
+                validation={validacion}
                 setValueInputs={setValueInputs}
                 valueInputs={valueInputs}
                 showValues={showValues}
                 key={index}
                 placeholder={placeholder}
-                validaciones={validaciones}
+                validations={validaciones}
               />
             </Grid>
           );
@@ -94,105 +87,22 @@ export default function Forms({
         </Grid>
         {/*Form of select type state */}
         <Grid item xs={2} md={2} lg={2}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Selecciona tu estado
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={valueInputs.estate}
-              label="Selecciona tu estado"
-              onChange={(e) => {
-                setValueInputs((current) => {
-                  return !showValues
-                    ? { ...current, estate: e.target.value }
-                    : { ...current };
-                });
-              }}
-            >
-              {statePerson.map((value, index) => {
-                return (
-                  <MenuItem key={index} value={value}>
-                    {value}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+          <FormSelect setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
           <hr />
         </Grid>
         {/*Form de input type text description*/}
         <Grid item xs={2} md={2} lg={2}>
-          <label htmlFor="description" style={{ fontFamily: "helvatica" }}>
-            Descripción
-          </label>
-          <br />
-          <textarea
-            value={valueInputs.description}
-            name="description"
-            id="description"
-            rows="3"
-            className="border-2 border-zinc-600 ml-4"
-            placeholder="Porque quiere solicitar el crédito"
-            style={{
-              fontFamily: "italic",
-              width: "100%",
-              border: "1px solid #acaaaa",
-              fontSize: "1.2rem",
-              resize: "none",
-              overflow: "auto",
-            }}
-            onChange={(e) => {
-              setValueInputs((current) => {
-                return !showValues
-                  ? { ...current, description: e.target.value }
-                  : { ...current };
-              });
-            }}
-          />
+         <FormTextarea setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
           <hr />
         </Grid>
         {/*input of date*/}
         <Grid item xs={2} md={2} lg={2}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
-              <DesktopDatePicker
-                label="Date desktop"
-                inputFormat="MM/dd/yyyy"
-                value={valueInputs.date}
-                onChange={(e) => {
-                  setValueInputs((current) => {
-                    return !showValues
-                      ? { ...current, date: e }
-                      : { ...current };
-                  });
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </Stack>
-          </LocalizationProvider>
+          <FormDate setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
           <hr />
         </Grid>
         {/*Form of input type file image*/}
         <Grid item xs={2} md={2} lg={1}>
-          <input
-            accept=".jpg,.png"
-            style={{ margin: "auto" }}
-            type="file"
-            name=""
-            id=""
-            onChange={(e) => {
-              setValueInputs((current) => {
-                return !showValues
-                  ? {
-                      ...current,
-                      image: URL.createObjectURL(e.target.files[0]),
-                    }
-                  : { ...current };
-              });
-            }}
-          />
+        <FormDataImg setValueInputs={setValueInputs}  showValues={showValues}/>
         </Grid>
         <br />
         <Grid item justifyContent={"center"} display={"flex"}>

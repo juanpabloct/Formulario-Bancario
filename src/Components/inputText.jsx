@@ -3,17 +3,16 @@ import React, { memo, useCallback } from "react";
 
 function InputText({
   placeholder,
-  validacion,
+  validation,
   showValues,
-  setValidaciones,
-  validaciones,
+  setValidations,
+  validations,
   setValueInputs,
   valueInputs,
 }) {
   const callback = useCallback((value) => {
-    return validacion(value);
+    return validation(value);
   });
-  console.log(valueInputs[placeholder]);
   return (
     <div>
       <TextField
@@ -21,7 +20,7 @@ function InputText({
         onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);
-          setValidaciones((valor) => {
+          setValidations((valor) => {
             return {
               ...valor,
               [placeholder]: resValidacion,
@@ -40,8 +39,8 @@ function InputText({
         label={placeholder}
         variant="outlined"
         sx={{ width: "100%" }}
-        error={validaciones[placeholder] && !validaciones[placeholder][0]}
-        helperText={validaciones[placeholder] && validaciones[placeholder][1]}
+        error={validations[placeholder] && !validations[placeholder][0]}
+        helperText={validations[placeholder] && validations[placeholder][1]}
       />
       <hr style={{ width: "100%", marginLeft: "0" }} />
     </div>
