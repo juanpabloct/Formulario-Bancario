@@ -1,11 +1,10 @@
 import { Grid } from "@mui/material";
 import React from "react";
+import "../Dataforms.css" 
 
 export default function DataForms({ values }) {
   const keys = Object.keys(values);
   const filterImage = keys.filter((value) => value === "image");
-  console.log(filterImage);
-
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Valores Formulario</h1>
@@ -40,7 +39,8 @@ export default function DataForms({ values }) {
                 {keys.map((item, index) => {
                   if (item !== "image") {
                     if (item === "date") {
-                      return (
+                    
+                      return values[item]!=''&&(
                         <div key={index}>
                           <h3
                             style={{
@@ -55,8 +55,9 @@ export default function DataForms({ values }) {
                         </div>
                       );
                     } else {
-                      return (
-                        <div key={index}>
+                      console.log(values[item]);
+                      return values[item]!=''&&(
+                        <div key={index} className='styleValue'>
                           <h3
                             style={{
                               fontFamily: "cursive",
@@ -66,9 +67,9 @@ export default function DataForms({ values }) {
                           >
                             {item}
                           </h3>
-                          <span style={{ fontFamily: "verdana" }}>
+                          <p style={{ fontFamily: "verdana" }} >
                             {values[item]}
-                          </span>
+                          </p>
                           <hr />
                         </div>
                       );

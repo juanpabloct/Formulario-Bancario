@@ -13,10 +13,11 @@ function InputText({
   const callback = useCallback((value) => {
     return validacion(value);
   });
+  console.log(valueInputs[placeholder]);
   return (
     <div>
       <TextField
-        value={valueInputs.placeholder}
+        value={valueInputs[placeholder]}
         onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);

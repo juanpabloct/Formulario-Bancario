@@ -14,7 +14,6 @@ function App() {
   const [copyvalueInputs, setCopyvalueInputs] = useState([]);
   useEffect(() => {
     setCopyvalueInputs(valueInputs);
-    console.log(copyvalueInputs);
     setValueInputs(camposInputs);
   }, [showValues]);
   return (

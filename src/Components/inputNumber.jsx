@@ -17,7 +17,7 @@ function InputNumber({
   return (
     <div>
       <TextField
-        value={valueInputs.placeholder}
+        value={valueInputs[placeholder]}
         onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);
