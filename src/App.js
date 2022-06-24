@@ -28,7 +28,7 @@ function App() {
           md={showValues ? 4 : 9}
           xs={showValues ? 4 : 9}
           xl={showValues ? 4 : 9}
-          borderRight={showValues && "2px solid black"}
+          borderRight={showValues && "2px solid #240089"}
         >
           <h1 style={{ textAlign: "center", fontFamily: "italic" }}>
             Formulario Crediticio
