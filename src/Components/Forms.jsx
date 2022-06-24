@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import {FormInputsText, FormInputsNumbers} from "../variables/FormInputs";
+import { FormInputsText, FormInputsNumbers } from "../variables/FormInputs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -23,23 +23,30 @@ import validationIsValid from "../funciones/validationIsValid";
 import InputText from "./inputText";
 import InputNumber from "./inputNumber";
 
-export default function Forms({ valueInputs, setValueInputs, setShowValues, showValues }) {
+export default function Forms({
+  valueInputs,
+  setValueInputs,
+  setShowValues,
+  showValues,
+}) {
   const statePerson = ["Soltero", "Casado", "Divorciado"];
+  //all validation
   const [validaciones, setValidaciones] = useState({});
+  //Validations from input for active button
   const responseValidation = validationIsValid(validaciones);
-  const refereciaInputs=useRef()
   return (
-    <form action="" className="" style={{ width: "90%", margin:'auto' }}>
+    <form action="" className="" style={{ width: "90%", margin: "auto" }}>
+      {/*Form of input type text*/}
       <Grid container columns={2} justifyContent={"center"} spacing={2}>
         {FormInputsText.map((input, index) => {
           const { placeholder, validacion } = input;
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputText
-                refereciaInputs={refereciaInputs}
                 setValidaciones={setValidaciones}
                 validacion={validacion}
                 setValueInputs={setValueInputs}
+                valueInputs={valueInputs}
                 showValues={showValues}
                 key={index}
                 placeholder={placeholder}
@@ -48,16 +55,17 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             </Grid>
           );
         })}
+        {/*Form of input type Numbers*/}
         {FormInputsNumbers.map((input, index) => {
-          const { placeholder, validacion, length} = input;
+          const { placeholder, validacion, length } = input;
           return (
             <Grid item xs={2} md={2} lg={1} key={index}>
               <InputNumber
-                refereciaInputs={refereciaInputs}
                 setValidaciones={setValidaciones}
                 validacion={validacion}
                 length={length}
                 setValueInputs={setValueInputs}
+                valueInputs={valueInputs}
                 showValues={showValues}
                 key={index}
                 placeholder={placeholder}
@@ -66,13 +74,16 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             </Grid>
           );
         })}
+        {/*Form of checkbox work*/}
         <Grid item xs={2} md={2} lg={2}>
           <FormControlLabel
-            ref={refereciaInputs}
+            value={valueInputs.work}
             className="checkbox"
             onClick={(e) => {
               setValueInputs((current) => {
-                return !showValues?{ ...current, trabaja: e.target.checked }:{...current};
+                return !showValues
+                  ? { ...current, work: e.target.checked }
+                  : { ...current };
               });
             }}
             control={<Checkbox />}
@@ -80,6 +91,7 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           />
           <hr />
         </Grid>
+        {/*Form of select type state */}
         <Grid item xs={2} md={2} lg={2}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
@@ -88,11 +100,13 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={valueInputs.estado ? valueInputs.estado : ""}
+              value={valueInputs.estate}
               label="Selecciona tu estado"
               onChange={(e) => {
                 setValueInputs((current) => {
-                return !showValues?{ ...current, estado: e.target.value }:{...current};
+                  return !showValues
+                    ? { ...current, estate: e.target.value }
+                    : { ...current };
                 });
               }}
             >
@@ -107,13 +121,14 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           </FormControl>
           <hr />
         </Grid>
+        {/*Form de input type text description*/}
         <Grid item xs={2} md={2} lg={2}>
           <label htmlFor="description" style={{ fontFamily: "helvatica" }}>
             Descripción
           </label>
           <br />
           <textarea
-            ref={refereciaInputs}
+            value={valueInputs.description}
             name="description"
             id="description"
             rows="3"
@@ -127,25 +142,29 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
               resize: "none",
               overflow: "auto",
             }}
-            onKeyUp={(e) => {
+            onChange={(e) => {
               setValueInputs((current) => {
-                return !showValues?{ ...current, description: e.target.value }:{...current};
+                return !showValues
+                  ? { ...current, description: e.target.value }
+                  : { ...current };
               });
             }}
           />
           <hr />
         </Grid>
+        {/*input of date*/}
         <Grid item xs={2} md={2} lg={2}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack spacing={3}>
               <DesktopDatePicker
-              ref={refereciaInputs}
                 label="Date desktop"
                 inputFormat="MM/dd/yyyy"
-                value={valueInputs.date ? valueInputs.date : ""}
+                value={valueInputs.date}
                 onChange={(e) => {
                   setValueInputs((current) => {
-                    return !showValues?{ ...current, date: e }:{...current};
+                    return !showValues
+                      ? { ...current, date: e }
+                      : { ...current };
                   });
                 }}
                 renderInput={(params) => <TextField {...params} />}
@@ -154,19 +173,22 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
           </LocalizationProvider>
           <hr />
         </Grid>
+        {/*Form of input type file image*/}
         <Grid item xs={2} md={2} lg={1}>
           <input
+            accept=".jpg,.png"
             style={{ margin: "auto" }}
             type="file"
             name=""
             id=""
-            ref={refereciaInputs}
             onChange={(e) => {
               setValueInputs((current) => {
-                return !showValues?{
-                  ...current,
-                  image: URL.createObjectURL(e.target.files[0]),
-                }:{...current}
+                return !showValues
+                  ? {
+                      ...current,
+                      image: URL.createObjectURL(e.target.files[0]),
+                    }
+                  : { ...current };
               });
             }}
           />
@@ -185,9 +207,8 @@ export default function Forms({ valueInputs, setValueInputs, setShowValues, show
             variant="contained"
             disabled={!responseValidation}
             sx={{ margin: "auto" }}
-            onClick={()=>{
-              setShowValues(true)
-              console.log(refereciaInputs.current);
+            onClick={() => {
+              setShowValues(true);
             }}
           >
             Enviar
