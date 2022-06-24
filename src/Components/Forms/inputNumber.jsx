@@ -28,12 +28,11 @@ function InputNumber({
             };
           });
           setValueInputs((valor) => {
-            return !showValues
-              ? {
+            return  {
                   ...valor,
                   [placeholder]: e.target.value,
                 }
-              : { ...valor };
+
           });
         }}
         inputProps={{
@@ -44,7 +43,7 @@ function InputNumber({
         variant="outlined"
         sx={{ width: "100%" }}
         error={validaciones[placeholder] && !validaciones[placeholder][0]}
-        helperText={validaciones[placeholder] && validaciones[placeholder][1]}
+        helperText={validaciones[placeholder] && !validaciones[placeholder][0] &&validaciones[placeholder][1]}
       />
       <hr style={{ width: "100%", marginLeft: "0" }} />
     </div>

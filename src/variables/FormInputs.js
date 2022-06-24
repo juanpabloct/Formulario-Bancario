@@ -10,9 +10,9 @@ export const FormInputsText = [
     placeholder: "name",
     validacion: (validacion) => {
       if (Number.isInteger(+validacion)) {
-        return [false, "Caracteres invalidos"];
+        return [false, "Characteres invalids"];
       } else {
-        return [true, "Caracteres correctos"];
+        return [true, "Characteres corrects"];
       }
     },
   },
@@ -22,7 +22,7 @@ export const FormInputsText = [
       if (Number.isInteger(+validacion)) {
         return [false, "Caracteres invalidos"];
       } else {
-        return [true, "Nombre correcto"];
+        return [true, "Name correct"];
       }
     },
   },
@@ -34,7 +34,7 @@ export const FormInputsNumbers = [
       if (Number.isInteger(+valorInput)) {
         return CondicionEsNumero(condicionEdad, valorInput);
       } else {
-        return [false, "No es un numero correcto"];
+        return [false, "Not is a number correct"];
       }
     },
     length: 2,
@@ -45,7 +45,7 @@ export const FormInputsNumbers = [
       if (Number.isInteger(+valorInput)) {
         return CondicionEsNumero(condicionMensual, valorInput);
       } else {
-        return [false, "No es un numero correcto"];
+        return [false, "Not is a number correct"];
       }
     },
   },

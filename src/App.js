@@ -13,10 +13,7 @@ function App() {
   const [showValues, setShowValues] = useState(false);
   const [copyvalueInputs, setCopyvalueInputs] = useState([]);
   //The change shiwValues that copy the values of the valueInputs
-  useEffect(() => {
-    setCopyvalueInputs(valueInputs);
-    setValueInputs(camposInputs);
-  }, [showValues]);
+
   return (
     <div className="App ">
       <Grid container columns={12} spacing="4">
@@ -38,6 +35,7 @@ function App() {
             setValueInputs={setValueInputs}
             setShowValues={setShowValues}
             showValues={showValues}
+            setCopyvalueInputs={setCopyvalueInputs}
           />
         </Grid>
         {showValues && (

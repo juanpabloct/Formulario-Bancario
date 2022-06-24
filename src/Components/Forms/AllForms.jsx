@@ -17,12 +17,14 @@ import FormDataImg from "./FormDataImg";
 import FormDate from "./FormDate";
 import FormSelect from "./FormSelect";
 import FormTextarea from "./FormTextarea";
+import { camposInputs } from "../../variables/camposInputs";
 
 export default function AllForms({
   valueInputs,
   setValueInputs,
   setShowValues,
   showValues,
+  setCopyvalueInputs
 }) {
   //all validation
   const [validaciones, setValidaciones] = useState({});
@@ -119,6 +121,17 @@ export default function AllForms({
             disabled={!responseValidation}
             sx={{ margin: "auto" }}
             onClick={() => {
+              setCopyvalueInputs((current)=>{
+                if(current.length==0){
+                  return valueInputs
+                }
+                else{
+                  console.log(Object.assign(current, valueInputs));
+                  return valueInputs
+
+                }
+              })
+              setValueInputs(camposInputs)
               setShowValues(true);
             }}
           >

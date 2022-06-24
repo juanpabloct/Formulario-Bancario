@@ -27,12 +27,10 @@ function InputText({
             };
           });
           setValueInputs((valor) => {
-            return !showValues
-              ? {
+            return  {
                   ...valor,
                   [placeholder]: e.target.value,
                 }
-              : { ...valor };
           });
         }}
         id="outlined-basic"
@@ -40,7 +38,7 @@ function InputText({
         variant="outlined"
         sx={{ width: "100%" }}
         error={validations[placeholder] && !validations[placeholder][0]}
-        helperText={validations[placeholder] && validations[placeholder][1]}
+        helperText={validations[placeholder] && !validations[placeholder][0]&&validations[placeholder][1]}
       />
       <hr style={{ width: "100%", marginLeft: "0" }} />
     </div>
