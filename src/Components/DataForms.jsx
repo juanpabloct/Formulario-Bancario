@@ -7,7 +7,6 @@ export default function DataForms({ values }) {
   const keys = Object.keys(values);
   //Filter image for show if exist
   const filterImage = keys.filter((value) => value === "image");
-  console.log(values[filterImage[0]]);
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Valores Formulario</h1>
