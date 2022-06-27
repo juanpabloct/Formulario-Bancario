@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  Checkbox,
-  FormControlLabel,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Checkbox, FormControlLabel, Button, Grid } from "@mui/material";
 import { useState } from "react";
 
 import { FormInputsText, FormInputsNumbers } from "../../variables/FormInputs";
@@ -24,7 +19,7 @@ export default function AllForms({
   setValueInputs,
   setShowValues,
   showValues,
-  setCopyvalueInputs
+  setCopyvalueInputs,
 }) {
   //all validation
   const [validaciones, setValidaciones] = useState({});
@@ -73,13 +68,10 @@ export default function AllForms({
         {/*Form of checkbox work*/}
         <Grid item xs={2} md={2} lg={2}>
           <FormControlLabel
-            value={valueInputs.work}
             className="checkbox"
             onClick={(e) => {
               setValueInputs((current) => {
-                return !showValues
-                  ? { ...current, work: e.target.checked }
-                  : { ...current };
+                return { ...current, work: e.target.checked };
               });
             }}
             control={<Checkbox />}
@@ -89,22 +81,37 @@ export default function AllForms({
         </Grid>
         {/*Form of select type state */}
         <Grid item xs={2} md={2} lg={2}>
-          <FormSelect setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
+          <FormSelect
+            setValueInputs={setValueInputs}
+            valueInputs={valueInputs}
+            showValues={showValues}
+          />
           <hr />
         </Grid>
         {/*Form de input type text description*/}
         <Grid item xs={2} md={2} lg={2}>
-          <FormTextarea setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
+          <FormTextarea
+            setValueInputs={setValueInputs}
+            valueInputs={valueInputs}
+            showValues={showValues}
+          />
           <hr />
         </Grid>
         {/*input of date*/}
         <Grid item xs={2} md={2} lg={2}>
-          <FormDate setValueInputs={setValueInputs} valueInputs={valueInputs} showValues={showValues}/>
+          <FormDate
+            setValueInputs={setValueInputs}
+            valueInputs={valueInputs}
+            showValues={showValues}
+          />
           <hr />
         </Grid>
         {/*Form of input type file image*/}
         <Grid item xs={2} md={2} lg={1}>
-        <FormDataImg setValueInputs={setValueInputs}  showValues={showValues}/>
+          <FormDataImg
+            setValueInputs={setValueInputs}
+            showValues={showValues}
+          />
         </Grid>
         <br />
         <Grid item justifyContent={"center"} display={"flex"}>
@@ -121,17 +128,10 @@ export default function AllForms({
             disabled={!responseValidation}
             sx={{ margin: "auto" }}
             onClick={() => {
-              setCopyvalueInputs((current)=>{
-                if(current.length==0){
-                  return valueInputs
-                }
-                else{
-                  console.log(Object.assign(current, valueInputs));
-                  return valueInputs
-
-                }
-              })
-              setValueInputs(camposInputs)
+              setCopyvalueInputs((current) => {
+                return [...current, valueInputs];
+              });
+              setValueInputs(camposInputs);
               setShowValues(true);
             }}
           >

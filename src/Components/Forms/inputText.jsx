@@ -20,17 +20,17 @@ function InputText({
         onChange={(e) => {
           const valueInput = e.target.value;
           const resValidacion = callback(valueInput);
-          setValidations((valor) => {
+          setValidations((current) => {
             return {
-              ...valor,
-              [placeholder]: resValidacion,
+              ...current,
+              placeholder: resValidacion,
             };
           });
           setValueInputs((valor) => {
-            return  {
-                  ...valor,
-                  [placeholder]: e.target.value,
-                }
+            return {
+              ...valor,
+              [placeholder]: e.target.value,
+            };
           });
         }}
         id="outlined-basic"
@@ -38,7 +38,11 @@ function InputText({
         variant="outlined"
         sx={{ width: "100%" }}
         error={validations[placeholder] && !validations[placeholder][0]}
-        helperText={validations[placeholder] && !validations[placeholder][0]&&validations[placeholder][1]}
+        helperText={
+          validations[placeholder] &&
+          !validations[placeholder][0] &&
+          validations[placeholder][1]
+        }
       />
       <hr style={{ width: "100%", marginLeft: "0" }} />
     </div>

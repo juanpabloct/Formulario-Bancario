@@ -1,95 +1,52 @@
 import { Grid } from "@mui/material";
-import React from "react";
-import "../Dataforms.css" 
+import { set } from "date-fns";
+import React, { useState } from "react";
+import "../Dataforms.css";
 //Component of values of the forms
 export default function DataForms({ values }) {
-  //Keys are the name placeholder of the form
-  const keys = Object.keys(values);
-  //Filter image for show if exist
-  const filterImage = keys.filter((value) => value === "image");
+  console.log(values[values.length - 1]);
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Valores Formulario</h1>
-      <hr />
-      <Grid
-        container
-        columns={values[filterImage[0]].length>0 ? 2 : 1}
-        style={{ textAlign: "center" }}
-      >
-        {
-          <Grid item xs={2} md={1}>
-            {[values].map((value, index) => {
-              return (
-                <div key={index}>
-                  {
-                  //If image exist that take that space
-                  }
-                  {filterImage[0] === "image" && (
-                    <img
-                      style={{ width: "100%" }}
-                      src={values[filterImage[0]]}
-                      alt=""
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </Grid>
-        }
-        {
-        //Values of the input*
-        }
-        <Grid item xs={2} md={1} height={"30rem"} overflow="auto">
-          {[values].map((value, index) => {
-            return (
-              <div key={index}>
-                {keys.map((item, index) => {
-                  if (item !== "image") {
-                      //value of the date      
-                    if (item === "date") {
-                      //if date dont have value then it isnt show 
-                      return values[item]!==''&&(
-                        <div key={index}>
-                          <h3
-                            style={{
-                              fontFamily: "cursive",
-                              textTransform: "capitalize",
-                              backgroundColor: "aliceblue",
-                            }}
-                          >
-                            {item}
-                          </h3>
-                          <span>{values[item].constructor()}</span>
-                        </div>
-                      );
-                    //values of inputs
-                    } else {
-                      //if input text and number dont have value then it isnt show
-                      return values[item]!==''&&(
-                        <div key={index} className='styleValue'>
-                          <h3
-                            style={{
-                              fontFamily: "cursive",
-                              textTransform: "capitalize",
-                              backgroundColor: "aliceblue",
-                            }}
-                          >
-                            {item}
-                          </h3>
-                          <p style={{ fontFamily: "verdana" }} >
-                            {values[item]}
-                          </p>
-                          <hr />
-                        </div>
-                      );
-                    }
-                  }
-                })}
-              </div>
-            );
-          })}
+    <Grid container columns={2}>
+      {values[values.length - 1].image.length > 0 && (
+        <Grid item sx={1}>
+          <h1 style={{ textTransform: "capitalize" }}>Image</h1>
+          <img
+            src={values[values.length - 1].image}
+            alt=""
+            style={{ width: "100%" }}
+          />
         </Grid>
+      )}
+      <Grid item>
+        {values.map((value, index) => {
+          //Keys are the name placeholder of the form
+          const keys = Object.keys(value);
+          return keys.map((key, index) => {
+            if (
+              value[key].length > 0 ||
+              (key === "date" &&
+                value[key].constructor().length > 0 &&
+                key !== "image")
+            ) {
+              if (key === "date") {
+                return (
+                  <>
+                    <h1 style={{ textTransform: "capitalize" }}>{key}</h1>
+                    <p className="styleValue">{value[key].constructor()}</p>
+                  </>
+                );
+              } else {
+                return (
+                  <>
+                    <h1 style={{ textTransform: "capitalize" }}>{key}</h1>
+                    <p className="styleValue">{value[key]}</p>
+                  </>
+                );
+              }
+            }
+          });
+        })}
       </Grid>
-    </div>
+    </Grid>
   );
 }
